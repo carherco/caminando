@@ -1,0 +1,2 @@
+# caminando
+Para hacer grupos
