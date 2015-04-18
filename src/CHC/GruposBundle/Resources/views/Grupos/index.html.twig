@@ -34,7 +34,7 @@
 
             <div id="total_hermanos" class="row">
                 <div class="col-sm-4">
-                    {% verbatim %} {{ num_personas }} {% endverbatim %}hermanos para hacer grupos.
+                    {% verbatim %} {{ numPersonas() }} {% endverbatim %}hermanos para hacer grupos.
                 </div>
             </div>
 
@@ -107,7 +107,7 @@
                             <option value="6">6</option>
                             <option value="7">7</option>
                           </select> 
-                          grupos de mínimo {% verbatim %}{{ Math.floor(num_personas / num_grupos) }}{% endverbatim %} personas
+                          grupos de mínimo {% verbatim %}{{ Math.floor(numPersonas() / num_grupos) }}{% endverbatim %} personas
                         
                           <button type="button" class="btn btn-default" ng-click="hacerGrupos();">Hacer grupos</button>
                         </div>
@@ -132,5 +132,5 @@
 
 
     </div>
-    
+                    
 {% endblock %}
