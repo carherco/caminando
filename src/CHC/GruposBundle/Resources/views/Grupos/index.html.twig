@@ -1,0 +1,136 @@
+{% extends 'CHCGruposBundle::layout.html.twig' %}
+
+{% block body %}
+  
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Gestor de grupos</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: checkTabMenu(0)}"><a ng-click="setTabMenu(0)" href="#">Hermanos</a></li>
+            <li ng-class="{active: checkTabMenu(1)}"><a ng-click="setTabMenu(1)" href="#about">Grupos</a></li>     
+          </ul>
+        </div><!--/.nav-collheapse -->
+      </div>
+    </nav>    
+      
+ 
+    <div class="container theme-showcase" role="main">
+
+        <div ng-show="checkTabMenu(0)">  
+
+            <div class="page-header">
+                <h1>Listado de hermanos</h1>
+            </div>
+
+            <div id="total_hermanos" class="row">
+                <div class="col-sm-4">
+                    {% verbatim %} {{ num_personas }} {% endverbatim %}hermanos para hacer grupos.
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Matrimonios</h3>
+                        </div>
+                        <div class="panel-body" droppable>
+                            <ul class="list-group" ng-cloak>
+                                <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>{% verbatim %} {{ matrimonio }} {% endverbatim %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+
+                <div class="col-sm-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Solteros</h3>
+                        </div>
+                        <div class="panel-body" droppable>
+                            <ul class="list-group" ng-cloak>
+                                <li class="list-group-item" ng-repeat="soltero in solteros" draggable>{% verbatim %}{{ soltero }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="soltero in bajan_poco" draggable>{% verbatim %}{{ soltero }}{% endverbatim %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+
+                <div class="col-sm-4">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ausentes</h3>
+                        </div>
+                        <div class="panel-body" id="panel-body-ausente" droppable>
+                            <ul class="list-group" ng-cloak>
+                                <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>{% verbatim %}{{ ausente }}{% endverbatim %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- /.col-sm-4 -->
+
+
+            </div>  
+
+
+        </div>    
+
+        <div ng-show="checkTabMenu(1)">  
+
+            <div class="page-header">
+                <h1>Grupos</h1>
+            </div> 
+
+            
+            
+            <div class="row">
+                <div class="col-sm-12 center-block">
+                    
+                    <form class="form-inline">
+                        <div class="form-group">
+                          <label for="num_grupos">Hacer</label>
+                          <select id="num_grupos" ng-model="num_grupos">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                          </select> 
+                          grupos de mínimo {% verbatim %}{{ Math.floor(num_personas / num_grupos) }}{% endverbatim %} personas
+                        
+                          <button type="button" class="btn btn-default" ng-click="hacerGrupos();">Hacer grupos</button>
+                        </div>
+                        
+                    </form>
+
+                </div>              
+   
+            </div>
+          
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="grupo in grupos">
+                  <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="hermano in grupo" ng-class="{ 'bg-success': $first }">{% verbatim %}{{ hermano }}{% endverbatim %}</li>
+                  </ul>
+                </div><!-- /.col-sm-4 -->
+                
+            </div>
+ 
+        </div>   
+
+
+
+    </div>
+    
+{% endblock %}

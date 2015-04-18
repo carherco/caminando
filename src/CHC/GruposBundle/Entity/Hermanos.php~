@@ -1,0 +1,56 @@
+<?php
+
+namespace CHC\GruposBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Hermanos
+ *
+ * @ORM\Table(name="hermanos", indexes={@ORM\Index(name="id_comunidad", columns={"id_comunidad"})})
+ * @ORM\Entity
+ */
+class Hermanos
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=30, nullable=false)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tipo", type="string", length=20, nullable=false)
+     */
+    private $tipo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \CHC\GruposBundle\Entity\Comunidad
+     *
+     * @ORM\ManyToOne(targetEntity="CHC\GruposBundle\Entity\Comunidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_comunidad", referencedColumnName="id")
+     * })
+     */
+    private $idComunidad;
+
+
+}

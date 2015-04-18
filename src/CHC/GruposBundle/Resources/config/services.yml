@@ -1,0 +1,4 @@
+services:
+#    chc_grupos.example:
+#        class: CHC\GruposBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

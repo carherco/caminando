@@ -1,0 +1,3 @@
+chc_grupos_grupos:
+    path:     /comunidad/{codigo}
+    defaults: { _controller: CHCGruposBundle:Grupos:index }
