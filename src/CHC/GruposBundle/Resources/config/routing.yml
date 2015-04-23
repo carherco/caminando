@@ -12,6 +12,11 @@ chc_matrimonios_post:
     methods:  [POST]
     defaults: { _controller: CHCGruposBundle:Grupos:postMatrimonios }
     
+chc_matrimonios_delete:
+    path:     /matrimonios/{codigo}/{id}
+    methods:  [DELETE]
+    defaults: { _controller: CHCGruposBundle:Grupos:deleteMatrimonios }
+    
 chc_solteros_get:
     path:     /solteros/{codigo}
     methods:  [GET]

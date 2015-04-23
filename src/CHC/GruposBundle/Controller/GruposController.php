@@ -17,9 +17,15 @@ class GruposController extends Controller
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
         
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=1 AND h.tipo='matrimonio'");
-        $data = $query->getArrayResult();
+        $data = array();
+        if($comunidad instanceof \CHC\GruposBundle\Entity\Comunidad){
+            $id_comunidad = $comunidad->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='matrimonio'");
+            $data = $query->getArrayResult();
+        }
+        
+        
         
         return new HttpFoundation\JsonResponse($data);
  
@@ -30,9 +36,13 @@ class GruposController extends Controller
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
         
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=1 AND h.tipo='soltero'");
-        $data = $query->getArrayResult();
+        $data = array();
+        if($comunidad instanceof \CHC\GruposBundle\Entity\Comunidad){
+            $id_comunidad = $comunidad->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='soltero'");
+            $data = $query->getArrayResult();
+        }
         
         return new HttpFoundation\JsonResponse($data);
  
@@ -43,9 +53,13 @@ class GruposController extends Controller
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
         
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=1 AND h.tipo='ausente'");
-        $data = $query->getArrayResult();
+        $data = array();
+        if($comunidad instanceof \CHC\GruposBundle\Entity\Comunidad){
+            $id_comunidad = $comunidad->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery("SELECT h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='ausente'");
+            $data = $query->getArrayResult();
+        }
         
         return new HttpFoundation\JsonResponse($data);
  
@@ -53,7 +67,6 @@ class GruposController extends Controller
     
     public function postMatrimoniosAction($codigo)
     {
-        $request = HttpFoundation\Request::createFromGlobals();
         $data = json_decode($this->get("request")->getContent(), true);
         $nombre = $data['nombre'];
         
@@ -77,7 +90,6 @@ class GruposController extends Controller
     
     public function postSolterosAction($codigo)
     {
-        $request = HttpFoundation\Request::createFromGlobals();
         $data = json_decode($this->get("request")->getContent(), true);
         $nombre = $data['nombre'];
         
@@ -101,7 +113,6 @@ class GruposController extends Controller
     
     public function postAusentesAction($codigo)
     {
-        $request = HttpFoundation\Request::createFromGlobals();
         $data = json_decode($this->get("request")->getContent(), true);
         $nombre = $data['nombre'];
         
@@ -116,6 +127,30 @@ class GruposController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($ausente);
+            $em->flush();
+        }
+
+        return new HttpFoundation\JsonResponse(array('nombre'=>$nombre));
+ 
+    }
+    
+    public function deleteMatrimoniosAction($codigo,$id)
+    {
+        $request = HttpFoundation\Request::createFromGlobals();
+        $data = json_decode($this->get("request")->getContent(), true);
+        $nombre = $data['nombre'];
+        
+        $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
+        $comunidad = $comunidadRepository->findOneByCodigo($codigo);
+        
+        if(!empty($nombre)){
+            $matrimonio = new \CHC\GruposBundle\Entity\Hermanos();
+            $matrimonio->setIdComunidad($comunidad);
+            $matrimonio->setTipo('matrimonio');
+            $matrimonio->setNombre($nombre);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($matrimonio);
             $em->flush();
         }
 
