@@ -17,7 +17,17 @@ chc_solteros_get:
     methods:  [GET]
     defaults: { _controller: CHCGruposBundle:Grupos:getSolteros }
     
+chc_solteros_post:
+    path:     /solteros/{codigo}
+    methods:  [POST]
+    defaults: { _controller: CHCGruposBundle:Grupos:postSolteros }
+    
 chc_ausentes_get:
     path:     /ausentes/{codigo}
     methods:  [GET]
     defaults: { _controller: CHCGruposBundle:Grupos:getAusentes }
+    
+chc_ausentes_post:
+    path:     /ausentes/{codigo}
+    methods:  [POST]
+    defaults: { _controller: CHCGruposBundle:Grupos:postAusentes }

@@ -26,25 +26,29 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
   $scope.showMatrimonioForm = false;
   $scope.matrimonio_nuevo = {};
   $scope.addMatrimonio = function(){
-      $scope.matrimonios.push($scope.matrimonio_nuevo);
-      $scope.matrimonio_nuevo = {};
-      //además, añadir en remoto
+        $http.post(url_matrimonios_post, {nombre:$scope.matrimonio_nuevo.nombre}).success(function(data){
+            $scope.matrimonios.push($scope.matrimonio_nuevo);
+            $scope.matrimonio_nuevo = {};
+        });
+
   };
   
   $scope.showSolteroForm = false;
   $scope.soltero_nuevo = {};
   $scope.addSoltero = function(){
-      $scope.solteros.push($scope.soltero_nuevo);
-      $scope.soltero_nuevo = {};
-      //además, añadir en remoto
+        $http.post(url_solteros_post, {nombre:$scope.soltero_nuevo.nombre}).success(function(data){
+            $scope.solteros.push($scope.soltero_nuevo);
+            $scope.soltero_nuevo = {};
+        });
   };
   
   $scope.showAusenteForm = false;
   $scope.ausente_nuevo = {};
   $scope.addAusente = function(){
-      $scope.ausentes.push($scope.ausente_nuevo);
-      $scope.ausente_nuevo = {};
-      //además, añadir en remoto
+        $http.post(url_ausentes_post, {nombre:$scope.ausente_nuevo.nombre}).success(function(data){
+            $scope.ausentes.push($scope.ausente_nuevo);
+            $scope.ausente_nuevo = {};
+        });
   };
   
   
