@@ -57,7 +57,10 @@
                             </form>
                             
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>{% verbatim %} {{ matrimonio.nombre }} {% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>
+                                    {% verbatim %} {{ matrimonio.nombre }} {% endverbatim %}
+                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteMatrimonio($index)"><i class="fa fa-plus"></i> X</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -80,8 +83,10 @@
                             </form>
                             
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="soltero in solteros" draggable>{% verbatim %}{{ soltero.nombre }}{% endverbatim %}</li>
-                                <li class="list-group-item" ng-repeat="soltero in bajan_poco" draggable>{% verbatim %}{{ soltero.nombre }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="soltero in solteros" draggable>
+                                    {% verbatim %}{{ soltero.nombre }}{% endverbatim %}
+                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteSoltero($index)"><i class="fa fa-plus"></i> X</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -104,7 +109,10 @@
                             </form>
                             
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>{% verbatim %}{{ ausente.nombre }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>
+                                    {% verbatim %}{{ ausente.nombre }}{% endverbatim %}
+                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteAusente($index)"><i class="fa fa-plus"></i> X</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -175,5 +183,9 @@
         var url_matrimonios_post = '{{ path('chc_matrimonios_post', {'codigo': comunidad}) }}';
         var url_solteros_post = '{{ path('chc_solteros_post', {'codigo': comunidad}) }}';
         var url_ausentes_post = '{{ path('chc_ausentes_post', {'codigo': comunidad}) }}';
+        
+        var url_matrimonios_delete = '{{ path('chc_matrimonios_delete', {'codigo': comunidad, 'id':'*'}) | trim('*') }}';
+        var url_solteros_delete = '{{ path('chc_solteros_delete', {'codigo': comunidad, 'id':'*'}) | trim('*')  }}';
+        var url_ausentes_delete = '{{ path('chc_ausentes_delete', {'codigo': comunidad, 'id':'*'}) | trim('*')  }}';
     </script>
 {% endblock %}

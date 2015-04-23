@@ -27,18 +27,31 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
   $scope.matrimonio_nuevo = {};
   $scope.addMatrimonio = function(){
         $http.post(url_matrimonios_post, {nombre:$scope.matrimonio_nuevo.nombre}).success(function(data){
+            $scope.matrimonio_nuevo = {'id': data.id, 'nombre': data.nombre};
             $scope.matrimonios.push($scope.matrimonio_nuevo);
             $scope.matrimonio_nuevo = {};
         });
-
+  };
+  $scope.deleteMatrimonio = function(index){
+        var id = $scope.matrimonios[index].id;
+        $http.delete(url_matrimonios_delete+id).success(function(data){
+            $scope.matrimonios.splice(index, 1);
+        });
   };
   
   $scope.showSolteroForm = false;
   $scope.soltero_nuevo = {};
   $scope.addSoltero = function(){
         $http.post(url_solteros_post, {nombre:$scope.soltero_nuevo.nombre}).success(function(data){
+            $scope.soltero_nuevo = {'id': data.id, 'nombre': data.nombre};
             $scope.solteros.push($scope.soltero_nuevo);
             $scope.soltero_nuevo = {};
+        });
+  };
+  $scope.deleteSoltero = function(index){
+        var id = $scope.solteros[index].id;
+        $http.delete(url_solteros_delete+id).success(function(data){
+            $scope.solteros.splice(index, 1);
         });
   };
   
@@ -46,8 +59,15 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
   $scope.ausente_nuevo = {};
   $scope.addAusente = function(){
         $http.post(url_ausentes_post, {nombre:$scope.ausente_nuevo.nombre}).success(function(data){
+            $scope.ausente_nuevo = {'id': data.id, 'nombre': data.nombre};
             $scope.ausentes.push($scope.ausente_nuevo);
             $scope.ausente_nuevo = {};
+        });
+  };
+  $scope.deleteAusente = function(index){
+        var id = $scope.ausentes[index].id;
+        $http.delete(url_ausentes_delete+id).success(function(data){
+            $scope.ausentes.splice(index, 1);
         });
   };
   

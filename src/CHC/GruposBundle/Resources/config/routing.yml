@@ -15,7 +15,7 @@ chc_matrimonios_post:
 chc_matrimonios_delete:
     path:     /matrimonios/{codigo}/{id}
     methods:  [DELETE]
-    defaults: { _controller: CHCGruposBundle:Grupos:deleteMatrimonios }
+    defaults: { _controller: CHCGruposBundle:Grupos:deleteHermanos }
     
 chc_solteros_get:
     path:     /solteros/{codigo}
@@ -27,6 +27,11 @@ chc_solteros_post:
     methods:  [POST]
     defaults: { _controller: CHCGruposBundle:Grupos:postSolteros }
     
+chc_solteros_delete:
+    path:     /solteros/{codigo}/{id}
+    methods:  [DELETE]
+    defaults: { _controller: CHCGruposBundle:Grupos:deleteHermanos }
+    
 chc_ausentes_get:
     path:     /ausentes/{codigo}
     methods:  [GET]
@@ -36,3 +41,8 @@ chc_ausentes_post:
     path:     /ausentes/{codigo}
     methods:  [POST]
     defaults: { _controller: CHCGruposBundle:Grupos:postAusentes }
+    
+chc_ausentes_delete:
+    path:     /ausentes/{codigo}/{id}
+    methods:  [DELETE]
+    defaults: { _controller: CHCGruposBundle:Grupos:deleteHermanos }
