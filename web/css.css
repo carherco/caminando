@@ -1,0 +1,62 @@
+/* 
+    Document   : paula
+    Created on : 06-abr-2012, 12:53:23
+    Author     : carlos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+  display: block;
+}
+
+div {
+  float: none;
+}
+
+#seccion_configuracion {
+  width: 400px;
+  float: left;
+}
+
+#matrimonios {
+  margin-top: 20px;
+  width: 150px;
+  float: left;
+}
+
+#solteros {
+  margin-top: 20px;
+  width: 150px;
+  float: left;
+}
+
+#ausentes {
+  margin-top: 20px;
+  width: 150px;
+  float: left;
+}
+
+#total_hermanos {
+  margin-top: 20px;
+  width: 150px;
+  float: left;
+}
+
+#seccion_grupos {
+  width: 400px;
+  float: left;
+}
+
+.grupo {
+  margin: 20px;
+  width: 150px;
+  float: left;
+  /*border: solid black;*/
+}
+
