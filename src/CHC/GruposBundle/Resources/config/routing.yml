@@ -1,3 +1,23 @@
 chc_grupos_grupos:
     path:     /comunidad/{codigo}
     defaults: { _controller: CHCGruposBundle:Grupos:index }
+    
+chc_matrimonios_get:
+    path:     /matrimonios/{codigo}
+    methods:  [GET]
+    defaults: { _controller: CHCGruposBundle:Grupos:getMatrimonios }
+    
+chc_matrimonios_post:
+    path:     /matrimonios/{codigo}
+    methods:  [POST]
+    defaults: { _controller: CHCGruposBundle:Grupos:postMatrimonios }
+    
+chc_solteros_get:
+    path:     /solteros/{codigo}
+    methods:  [GET]
+    defaults: { _controller: CHCGruposBundle:Grupos:getSolteros }
+    
+chc_ausentes_get:
+    path:     /ausentes/{codigo}
+    methods:  [GET]
+    defaults: { _controller: CHCGruposBundle:Grupos:getAusentes }

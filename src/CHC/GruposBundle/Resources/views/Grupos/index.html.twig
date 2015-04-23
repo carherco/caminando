@@ -42,11 +42,22 @@
                 <div class="col-sm-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Matrimonios</h3>
+                            <h3 class="panel-title">Matrimonios
+                                <button type="button" class="btn btn-success" ng-click="showMatrimonioForm=!showMatrimonioForm"><i class="fa fa-plus"></i> +</button>
+                            </h3>
                         </div>
                         <div class="panel-body" droppable>
+
+                            <form name="matrimonioForm" ng-submit="addMatrimonio()" ng-show="showMatrimonioForm">
+                              <!--  Review Form -->
+                              <fieldset class="form-group">
+                                <input type="text" ng-model="matrimonio_nuevo.nombre" class="form-control" placeholder="nombre" title="Nombre" />
+                                <input type="submit" class="btn btn-primary pull-right" value="Añadir" />
+                              </fieldset>
+                            </form>
+                            
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>{% verbatim %} {{ matrimonio }} {% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>{% verbatim %} {{ matrimonio.nombre }} {% endverbatim %}</li>
                             </ul>
                         </div>
                     </div>
@@ -55,12 +66,22 @@
                 <div class="col-sm-4">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Solteros</h3>
+                            <h3 class="panel-title">Solteros
+                                <button type="button" class="btn btn-success" ng-click="showSolteroForm=!showSolteroForm"><i class="fa fa-plus"></i> +</button>
+                            </h3>
                         </div>
                         <div class="panel-body" droppable>
+                            
+                            <form name="solteroForm" ng-submit="addSoltero()" ng-show="showSolteroForm">
+                              <fieldset class="form-group">
+                                <input type="text" ng-model="soltero_nuevo.nombre" class="form-control" placeholder="nombre" title="Nombre" />
+                                <input type="submit" class="btn btn-primary pull-right" value="Añadir" />
+                              </fieldset>
+                            </form>
+                            
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="soltero in solteros" draggable>{% verbatim %}{{ soltero }}{% endverbatim %}</li>
-                                <li class="list-group-item" ng-repeat="soltero in bajan_poco" draggable>{% verbatim %}{{ soltero }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="soltero in solteros" draggable>{% verbatim %}{{ soltero.nombre }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="soltero in bajan_poco" draggable>{% verbatim %}{{ soltero.nombre }}{% endverbatim %}</li>
                             </ul>
                         </div>
                     </div>
@@ -69,11 +90,21 @@
                 <div class="col-sm-4">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Ausentes</h3>
+                            <h3 class="panel-title">Ausentes
+                                <button type="button" class="btn btn-success" ng-click="showAusenteForm=!showAusenteForm"><i class="fa fa-plus"></i> +</button>
+                            </h3>
                         </div>
                         <div class="panel-body" id="panel-body-ausente" droppable>
+                            
+                            <form name="ausenteForm" ng-submit="addAusente()" ng-show="showAusenteForm">
+                              <fieldset class="form-group">
+                                <input type="text" ng-model="ausente_nuevo.nombre" class="form-control" placeholder="nombre" title="Nombre" />
+                                <input type="submit" class="btn btn-primary pull-right" value="Añadir" />
+                              </fieldset>
+                            </form>
+                            
                             <ul class="list-group" ng-cloak>
-                                <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>{% verbatim %}{{ ausente }}{% endverbatim %}</li>
+                                <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>{% verbatim %}{{ ausente.nombre }}{% endverbatim %}</li>
                             </ul>
                         </div>
                     </div>
@@ -121,7 +152,7 @@
             <div class="row">
                 <div class="col-sm-4" ng-repeat="grupo in grupos">
                   <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="hermano in grupo" ng-class="{ 'bg-success': $first }">{% verbatim %}{{ hermano }}{% endverbatim %}</li>
+                    <li class="list-group-item" ng-repeat="hermano in grupo" ng-class="{ 'bg-success': $first }">{% verbatim %}{{ hermano.nombre }}{% endverbatim %}</li>
                   </ul>
                 </div><!-- /.col-sm-4 -->
                 
@@ -133,4 +164,12 @@
 
     </div>
                     
+{% endblock %}
+
+{% block initjs %}
+    <script>
+        var url_matrimonios_get = '{{ path('chc_matrimonios_get', {'codigo': comunidad}) }}';
+        var url_solteros_get = '{{ path('chc_solteros_get', {'codigo': comunidad}) }}';
+        var url_ausentes_get = '{{ path('chc_ausentes_get', {'codigo': comunidad}) }}';
+    </script>
 {% endblock %}

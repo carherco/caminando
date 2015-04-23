@@ -1,5 +1,4 @@
 var gruposApp = angular.module('gruposApp', []);
-var web_url = web_url;
 
 gruposApp.controller('GruposCtrl', function ($scope, $http) {
     
@@ -8,21 +7,46 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
   $scope.bajan_poco = [];
   $scope.ausentes = [];
 
-    $http.get(web_url+'/matrimonios.json').success(function(data){
+    $http.get(url_matrimonios_get).success(function(data){
           $scope.matrimonios = data;
     });
     
-    $http.get(web_url+'/solteros.json').success(function(data){
+    $http.get(url_solteros_get).success(function(data){
           $scope.solteros = data;
     });
     
-    $http.get(web_url+'/bajan_poco.json').success(function(data){
-          $scope.bajan_poco = data;
-    });
+//    $http.get(web_url+'/bajan_poco.json').success(function(data){
+//          $scope.bajan_poco = data;
+//    });
     
-    $http.get(web_url+'/ausentes.json').success(function(data){
+    $http.get(url_ausentes_get).success(function(data){
           $scope.ausentes = data;
     });
+  
+  $scope.showMatrimonioForm = false;
+  $scope.matrimonio_nuevo = {};
+  $scope.addMatrimonio = function(){
+      $scope.matrimonios.push($scope.matrimonio_nuevo);
+      $scope.matrimonio_nuevo = {};
+      //además, añadir en remoto
+  };
+  
+  $scope.showSolteroForm = false;
+  $scope.soltero_nuevo = {};
+  $scope.addSoltero = function(){
+      $scope.solteros.push($scope.soltero_nuevo);
+      $scope.soltero_nuevo = {};
+      //además, añadir en remoto
+  };
+  
+  $scope.showAusenteForm = false;
+  $scope.ausente_nuevo = {};
+  $scope.addAusente = function(){
+      $scope.ausentes.push($scope.ausente_nuevo);
+      $scope.ausente_nuevo = {};
+      //además, añadir en remoto
+  };
+  
   
   $scope.num_grupos = 6;
   $scope.numPersonas = function() {
