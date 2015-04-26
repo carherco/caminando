@@ -55,21 +55,40 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
         });
   };
   
-  $scope.showAusenteForm = false;
-  $scope.ausente_nuevo = {};
-  $scope.addAusente = function(){
-        $http.post(url_ausentes_post, {nombre:$scope.ausente_nuevo.nombre}).success(function(data){
-            $scope.ausente_nuevo = {'id': data.id, 'nombre': data.nombre};
-            $scope.ausentes.push($scope.ausente_nuevo);
-            $scope.ausente_nuevo = {};
+  $scope.ausentarMatrimonio = function(index){
+        var id = $scope.matrimonios[index].id;
+        $http.put(url_hermanos_put+id, {ausente:1}).success(function(data){
+            $scope.ausentes.push($scope.matrimonios[index]);
+            $scope.matrimonios.splice(index, 1);
         });
   };
+  $scope.ausentarSoltero = function(index){
+        var id = $scope.solteros[index].id;
+        $http.put(url_hermanos_put+id, {ausente:1}).success(function(data){
+            $scope.ausentes.push($scope.solteros[index]);
+            $scope.solteros.splice(index, 1);
+        });
+  };
+  $scope.desAusentar = function(index){
+        var id = $scope.ausentes[index].id;
+        $http.put(url_hermanos_put+id, {ausente:0}).success(function(data){
+            if(data.tipo === 'matrimonio') {
+                $scope.matrimonios.push($scope.ausentes[index]);
+            } else if(data.tipo === 'soltero') {
+                $scope.solteros.push($scope.ausentes[index]);
+            }
+            $scope.ausentes.splice(index, 1);
+        });
+  };
+  
   $scope.deleteAusente = function(index){
         var id = $scope.ausentes[index].id;
         $http.delete(url_ausentes_delete+id).success(function(data){
             $scope.ausentes.splice(index, 1);
         });
   };
+
+
   
   
   $scope.num_grupos = 6;

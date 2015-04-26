@@ -46,3 +46,8 @@ chc_ausentes_delete:
     path:     /ausentes/{codigo}/{id}
     methods:  [DELETE]
     defaults: { _controller: CHCGruposBundle:Grupos:deleteHermanos }
+    
+chc_hermanos_put:
+    path:     /hermanos/{codigo}/{id}
+    methods:  [PUT]
+    defaults: { _controller: CHCGruposBundle:Grupos:putHermanos }

@@ -161,4 +161,27 @@ class Hermano
         return $this->comunidad;
     }
     
+    /**
+     * Set ausente
+     *
+     * @param boolean $ausente
+     * @return Hermano
+     */
+    public function setAusente($ausente)
+    {
+        $this->ausente = $ausente;
+
+        return $this;
+    }
+
+    /**
+     * Get ausente
+     *
+     * @return boolean 
+     */
+    public function getAusente()
+    {
+        return $this->ausente;
+    }
+    
 }

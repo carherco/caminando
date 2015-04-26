@@ -59,7 +59,10 @@
                             <ul class="list-group" ng-cloak>
                                 <li class="list-group-item" ng-repeat="matrimonio in matrimonios" draggable>
                                     {% verbatim %} {{ matrimonio.nombre }} {% endverbatim %}
-                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteMatrimonio($index)"><i class="fa fa-plus"></i> X</button>
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-warning" ng-click="ausentarMatrimonio($index)"><span class="glyphicon glyphicon-log-out"></span></button>
+                                        <button type="button" class="btn btn-danger" ng-click="deleteMatrimonio($index)"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -85,7 +88,11 @@
                             <ul class="list-group" ng-cloak>
                                 <li class="list-group-item" ng-repeat="soltero in solteros" draggable>
                                     {% verbatim %}{{ soltero.nombre }}{% endverbatim %}
-                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteSoltero($index)"><i class="fa fa-plus"></i> X</button>
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-warning" ng-click="ausentarSoltero($index)"><span class="glyphicon glyphicon-log-out"></span></button>
+                                        <button type="button" class="btn btn-danger" ng-click="deleteSoltero($index)"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                    </span>
+                                    
                                 </li>
                             </ul>
                         </div>
@@ -95,23 +102,16 @@
                 <div class="col-sm-4">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Ausentes
-                                <button type="button" class="btn btn-success" ng-click="showAusenteForm=!showAusenteForm"><i class="fa fa-plus"></i> +</button>
-                            </h3>
+                            <h3 class="panel-title">Ausentes</h3>
                         </div>
                         <div class="panel-body" id="panel-body-ausente" droppable>
-                            
-                            <form name="ausenteForm" ng-submit="addAusente()" ng-show="showAusenteForm">
-                              <fieldset class="form-group">
-                                <input type="text" ng-model="ausente_nuevo.nombre" class="form-control" placeholder="nombre" title="Nombre" />
-                                <input type="submit" class="btn btn-primary pull-right" value="Añadir" />
-                              </fieldset>
-                            </form>
-                            
                             <ul class="list-group" ng-cloak>
                                 <li class="list-group-item" ng-repeat="ausente in ausentes" draggable>
                                     {% verbatim %}{{ ausente.nombre }}{% endverbatim %}
-                                    <button type="button" class="btn btn-danger pull-right" ng-click="deleteAusente($index)"><i class="fa fa-plus"></i> X</button>
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-success" ng-click="desAusentar($index)"><span class="glyphicon glyphicon-log-in"></span></button>
+                                        <button type="button" class="btn btn-danger" ng-click="deleteAusente($index)"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -187,5 +187,7 @@
         var url_matrimonios_delete = '{{ path('chc_matrimonios_delete', {'codigo': comunidad, 'id':'*'}) | trim('*') }}';
         var url_solteros_delete = '{{ path('chc_solteros_delete', {'codigo': comunidad, 'id':'*'}) | trim('*')  }}';
         var url_ausentes_delete = '{{ path('chc_ausentes_delete', {'codigo': comunidad, 'id':'*'}) | trim('*')  }}';
+        
+        var url_hermanos_put = '{{ path('chc_hermanos_put', {'codigo': comunidad, 'id':'*'}) | trim('*') }}';
     </script>
 {% endblock %}
