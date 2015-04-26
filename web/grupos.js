@@ -57,21 +57,21 @@ gruposApp.controller('GruposCtrl', function ($scope, $http) {
   
   $scope.ausentarMatrimonio = function(index){
         var id = $scope.matrimonios[index].id;
-        $http.put(url_hermanos_put+id, {ausente:1}).success(function(data){
+        $http.post(url_hermanos_put+id, {ausente:1}).success(function(data){
             $scope.ausentes.push($scope.matrimonios[index]);
             $scope.matrimonios.splice(index, 1);
         });
   };
   $scope.ausentarSoltero = function(index){
         var id = $scope.solteros[index].id;
-        $http.put(url_hermanos_put+id, {ausente:1}).success(function(data){
+        $http.post(url_hermanos_put+id, {ausente:1}).success(function(data){
             $scope.ausentes.push($scope.solteros[index]);
             $scope.solteros.splice(index, 1);
         });
   };
   $scope.desAusentar = function(index){
         var id = $scope.ausentes[index].id;
-        $http.put(url_hermanos_put+id, {ausente:0}).success(function(data){
+        $http.post(url_hermanos_put+id, {ausente:0}).success(function(data){
             if(data.tipo === 'matrimonio') {
                 $scope.matrimonios.push($scope.ausentes[index]);
             } else if(data.tipo === 'soltero') {
