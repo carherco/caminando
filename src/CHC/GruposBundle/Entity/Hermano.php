@@ -5,12 +5,12 @@ namespace CHC\GruposBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Hermanos
+ * Hermano
  *
- * @ORM\Table(name="hermanos", indexes={@ORM\Index(name="id_comunidad", columns={"id_comunidad"})})
+ * @ORM\Table(name="hermanos")
  * @ORM\Entity
  */
-class Hermanos
+class Hermano
 {
     /**
      * @var integer
@@ -20,6 +20,16 @@ class Hermanos
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+     * @var \CHC\GruposBundle\Entity\Comunidad
+     *
+     * @ORM\ManyToOne(targetEntity="CHC\GruposBundle\Entity\Comunidad")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_comunidad", referencedColumnName="id")
+     * })
+     */
+    private $comunidad;
     
     /**
      * @var string
@@ -43,22 +53,17 @@ class Hermanos
     private $telefono;
 
     /**
-     * @var \CHC\GruposBundle\Entity\Comunidad
+     * @var boolean
      *
-     * @ORM\ManyToOne(targetEntity="CHC\GruposBundle\Entity\Comunidad")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_comunidad", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="ausente", type="boolean")
      */
-    private $idComunidad;
-
-
+    private $ausente;
 
     /**
      * Set nombre
      *
      * @param string $nombre
-     * @return Hermanos
+     * @return Hermano
      */
     public function setNombre($nombre)
     {
@@ -81,7 +86,7 @@ class Hermanos
      * Set tipo
      *
      * @param string $tipo
-     * @return Hermanos
+     * @return Hermano
      */
     public function setTipo($tipo)
     {
@@ -104,7 +109,7 @@ class Hermanos
      * Set telefono
      *
      * @param string $telefono
-     * @return Hermanos
+     * @return Hermano
      */
     public function setTelefono($telefono)
     {
@@ -134,25 +139,26 @@ class Hermanos
     }
 
     /**
-     * Set idComunidad
+     * Set comunidad
      *
-     * @param \CHC\GruposBundle\Entity\Comunidad $idComunidad
-     * @return Hermanos
+     * @param \CHC\GruposBundle\Entity\Comunidad $comunidad
+     * @return Hermano
      */
-    public function setIdComunidad(\CHC\GruposBundle\Entity\Comunidad $idComunidad = null)
+    public function setComunidad(\CHC\GruposBundle\Entity\Comunidad $comunidad = null)
     {
-        $this->idComunidad = $idComunidad;
+        $this->comunidad = $comunidad;
 
         return $this;
     }
 
     /**
-     * Get idComunidad
+     * Get comunidad
      *
      * @return \CHC\GruposBundle\Entity\Comunidad 
      */
-    public function getIdComunidad()
+    public function getComunidad()
     {
-        return $this->idComunidad;
+        return $this->comunidad;
     }
+    
 }

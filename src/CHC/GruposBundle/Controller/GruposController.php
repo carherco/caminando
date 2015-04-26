@@ -22,7 +22,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='matrimonio'");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.comunidad=$id_comunidad AND h.tipo='matrimonio'");
             $data = $query->getArrayResult();
         }
         
@@ -41,7 +41,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='soltero'");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.comunidad=$id_comunidad AND h.tipo='soltero'");
             $data = $query->getArrayResult();
         }
         
@@ -58,7 +58,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.idComunidad=$id_comunidad AND h.tipo='ausente'");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermanos h where h.comunidad=$id_comunidad AND h.tipo='ausente'");
             $data = $query->getArrayResult();
         }
         
@@ -76,7 +76,7 @@ class GruposController extends Controller
         
         if(!empty($nombre)){
             $matrimonio = new Entity\Hermanos();
-            $matrimonio->setIdComunidad($comunidad);
+            $matrimonio->setComunidad($comunidad);
             $matrimonio->setTipo('matrimonio');
             $matrimonio->setNombre($nombre);
             
@@ -99,7 +99,7 @@ class GruposController extends Controller
         
         if(!empty($nombre)){
             $soltero = new Entity\Hermanos();
-            $soltero->setIdComunidad($comunidad);
+            $soltero->setComunidad($comunidad);
             $soltero->setTipo('soltero');
             $soltero->setNombre($nombre);
             
@@ -122,7 +122,7 @@ class GruposController extends Controller
         
         if(!empty($nombre)){
             $ausente = new Entity\Hermanos();
-            $ausente->setIdComunidad($comunidad);
+            $ausente->setComunidad($comunidad);
             $ausente->setTipo('ausente');
             $ausente->setNombre($nombre);
             
@@ -144,7 +144,7 @@ class GruposController extends Controller
         $hermano = $hermanosRepository->find($id);
         
         if($hermano instanceof Entity\Hermanos && $comunidad instanceof Entity\Comunidad){
-            if($hermano->getIdComunidad()->getId() === $comunidad->getId()){
+            if($hermano->getComunidad()->getId() === $comunidad->getId()){
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($hermano);
                 $em->flush();
