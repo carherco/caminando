@@ -26,9 +26,8 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        
-        
-        return new HttpFoundation\JsonResponse($data);
+        $response = new HttpFoundation\JsonResponse($data);
+        return $this->setCORSHeaders($response);
  
     }
     
@@ -45,7 +44,8 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        return new HttpFoundation\JsonResponse($data);
+        $response = new HttpFoundation\JsonResponse($data);
+        return $this->setCORSHeaders($response);
  
     }
     
@@ -62,7 +62,8 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        return new HttpFoundation\JsonResponse($data);
+        $response = new HttpFoundation\JsonResponse($data);
+        return $this->setCORSHeaders($response);
  
     }
     
@@ -86,8 +87,8 @@ class GruposController extends Controller
             $em->flush();
         }
 
-        return new HttpFoundation\JsonResponse(array('id'=>$matrimonio->getId(),'nombre'=>$matrimonio->getNombre()));
- 
+        $response = new HttpFoundation\JsonResponse(array('id'=>$matrimonio->getId(),'nombre'=>$matrimonio->getNombre()));
+        return $this->setCORSHeaders($response);
     }
     
     public function postSolterosAction($codigo)
@@ -110,8 +111,8 @@ class GruposController extends Controller
             $em->flush();
         }
 
-        return new HttpFoundation\JsonResponse(array('id'=>$soltero->getId(),'nombre'=>$soltero->getNombre()));
- 
+        $response = new HttpFoundation\JsonResponse(array('id'=>$soltero->getId(),'nombre'=>$soltero->getNombre()));
+        return $this->setCORSHeaders($response);
     }
     
 //    public function postAusentesAction($codigo)
@@ -153,8 +154,8 @@ class GruposController extends Controller
             }
         }
 
-        return new HttpFoundation\JsonResponse(array('deleted'));
- 
+        $response = new HttpFoundation\JsonResponse(array('deleted'));
+        return $this->setCORSHeaders($response);
     }
     
     public function putHermanosAction($codigo,$id)
@@ -180,8 +181,29 @@ class GruposController extends Controller
             }
         }
 
-        return new HttpFoundation\JsonResponse(array('id'=>$hermano->getId(),'nombre'=>$hermano->getNombre(),'tipo'=>$hermano->getTipo()));
- 
+        $response = new HttpFoundation\JsonResponse(array('id'=>$hermano->getId(),'nombre'=>$hermano->getNombre(),'tipo'=>$hermano->getTipo()));
+        return $this->setCORSHeaders($response);
+    }
+    
+    
+     /**
+     * Añade a la respuesta los headers necesarios para permitir
+     * cross site http requests
+     *
+     * @param Response $response
+     */
+    protected function setCORSHeaders(HttpFoundation\Response $response){
+        if (isset($_SERVER['HTTP_ORIGIN'])) {
+            $response->headers->add(array(
+                "Access-Control-Allow-Origin" => "*",
+                "Access-Control-Allow-Credentials" => "true",
+                "Access-Control-Allow-Methods" => 'POST, GET, PUT, DELETE, PATCH, OPTIONS',
+                "Access-Control-Allow-Headers" => 'origin, content-type, accept',
+                "Access-Control-Max-Age" => "86400"
+            ));
+        }
+
+        return $response;
     }
     
 }
