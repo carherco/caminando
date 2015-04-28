@@ -26,8 +26,7 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        $response = new HttpFoundation\JsonResponse($data);
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse($data);
  
     }
     
@@ -44,8 +43,7 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        $response = new HttpFoundation\JsonResponse($data);
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse($data);
  
     }
     
@@ -62,15 +60,17 @@ class GruposController extends Controller
             $data = $query->getArrayResult();
         }
         
-        $response = new HttpFoundation\JsonResponse($data);
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse($data);
  
     }
     
     public function postMatrimoniosAction($codigo)
     {
-        $data = json_decode($this->get("request")->getContent(), true);
-        $nombre = $data['nombre'];
+        
+        //$data = json_decode($this->get("request")->getContent(), true);
+        //$nombre = $data['nombre'];
+        $request = $this->getRequest();
+        $nombre = $request->get('nombre');
         
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
@@ -87,14 +87,14 @@ class GruposController extends Controller
             $em->flush();
         }
 
-        $response = new HttpFoundation\JsonResponse(array('id'=>$matrimonio->getId(),'nombre'=>$matrimonio->getNombre()));
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse(array('id'=>$matrimonio->getId(),'nombre'=>$matrimonio->getNombre()));
+
     }
     
     public function postSolterosAction($codigo)
     {
-        $data = json_decode($this->get("request")->getContent(), true);
-        $nombre = $data['nombre'];
+        $request = $this->getRequest();
+        $nombre = $request->get('nombre');
         
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
@@ -111,8 +111,8 @@ class GruposController extends Controller
             $em->flush();
         }
 
-        $response = new HttpFoundation\JsonResponse(array('id'=>$soltero->getId(),'nombre'=>$soltero->getNombre()));
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse(array('id'=>$soltero->getId(),'nombre'=>$soltero->getNombre()));
+
     }
     
 //    public function postAusentesAction($codigo)
@@ -154,8 +154,8 @@ class GruposController extends Controller
             }
         }
 
-        $response = new HttpFoundation\JsonResponse(array('deleted'));
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse(array('deleted'));
+
     }
     
     public function putHermanosAction($codigo,$id)
@@ -181,8 +181,8 @@ class GruposController extends Controller
             }
         }
 
-        $response = new HttpFoundation\JsonResponse(array('id'=>$hermano->getId(),'nombre'=>$hermano->getNombre(),'tipo'=>$hermano->getTipo()));
-        return $this->setCORSHeaders($response);
+        return  new HttpFoundation\JsonResponse(array('id'=>$hermano->getId(),'nombre'=>$hermano->getNombre(),'tipo'=>$hermano->getTipo()));
+
     }
     
     
@@ -193,15 +193,7 @@ class GruposController extends Controller
      * @param Response $response
      */
     protected function setCORSHeaders(HttpFoundation\Response $response){
-        if (isset($_SERVER['HTTP_ORIGIN'])) {
-            $response->headers->add(array(
-                "Access-Control-Allow-Origin" => "*",
-                "Access-Control-Allow-Credentials" => "true",
-                "Access-Control-Allow-Methods" => 'POST, GET, PUT, DELETE, PATCH, OPTIONS',
-                "Access-Control-Allow-Headers" => 'origin, content-type, accept',
-                "Access-Control-Max-Age" => "86400"
-            ));
-        }
+        
 
         return $response;
     }

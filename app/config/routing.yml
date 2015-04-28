@@ -2,6 +2,3 @@ chc_grupos:
     resource: "@CHCGruposBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
