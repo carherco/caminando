@@ -160,8 +160,8 @@ class GruposController extends Controller
     
     public function putHermanosAction($codigo,$id)
     {
-        $data = json_decode($this->get("request")->getContent(), true);
-        $ausente = $data['ausente'];
+        $request = $this->getRequest();
+        $ausente = $request->get('ausente');
         
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
