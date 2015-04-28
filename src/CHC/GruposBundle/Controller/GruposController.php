@@ -22,7 +22,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.tipo='matrimonio' AND h.ausente=0");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.tipo='matrimonio' AND h.ausente=0 ORDER BY h.nombre");
             $data = $query->getArrayResult();
         }
         
@@ -39,7 +39,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.tipo='soltero' AND h.ausente=0");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.tipo='soltero' AND h.ausente=0 ORDER BY h.nombre");
             $data = $query->getArrayResult();
         }
         
@@ -56,7 +56,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.ausente=1");
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad AND h.ausente=1 ORDER BY h.nombre");
             $data = $query->getArrayResult();
         }
         
