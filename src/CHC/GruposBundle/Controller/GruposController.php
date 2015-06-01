@@ -172,7 +172,7 @@ class GruposController extends Controller
         
         if($hermano instanceof Entity\Hermano && $comunidad instanceof Entity\Comunidad){
             if($hermano->getComunidad()->getId() === $comunidad->getId()){
-                if(!is_null($ausente)){
+                if(!is_null($ausente) || !is_null($nombre)){
                     if(!is_null($ausente)) {$hermano->setAusente($ausente);}
                     if(!is_null($nombre)) {$hermano->setNombre($nombre);}
                     $em = $this->getDoctrine()->getManager();
