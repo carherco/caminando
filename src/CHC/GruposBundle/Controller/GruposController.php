@@ -162,6 +162,7 @@ class GruposController extends Controller
     {
         $request = $this->getRequest();
         $ausente = $request->get('ausente');
+        $nombre = $request->get('nombre');
         
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
         $comunidad = $comunidadRepository->findOneByCodigo($codigo);
