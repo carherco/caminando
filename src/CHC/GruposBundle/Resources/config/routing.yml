@@ -32,6 +32,11 @@ chc_solteros_post:
     methods:  [POST]
     defaults: { _controller: CHCGruposBundle:Grupos:postSolteros }
     
+chc_solteros_put:
+    path:     /solteros/{codigo}/{id}
+    methods:  [PUT]
+    defaults: { _controller: CHCGruposBundle:Grupos:putHermanos }
+    
 chc_solteros_delete:
     path:     /solteros/{codigo}/{id}
     methods:  [DELETE]
