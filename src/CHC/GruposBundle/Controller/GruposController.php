@@ -22,7 +22,7 @@ class GruposController extends Controller
         if($comunidad instanceof Entity\Comunidad){
             $id_comunidad = $comunidad->getId();
             $em = $this->getDoctrine()->getEntityManager();
-            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad ORDER BY h.nombre");
+            $query = $em->createQuery("SELECT h.id, h.nombre, h.ausente FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad ORDER BY h.nombre");
             $data = $query->getArrayResult();
         }
         
