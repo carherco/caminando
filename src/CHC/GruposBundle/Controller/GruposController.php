@@ -13,6 +13,23 @@ class GruposController extends Controller
         return $this->render('CHCGruposBundle:Grupos:index.html.twig', array('comunidad' => $codigo));
     }
     
+    public function getHermanosAction($codigo)
+    {
+        $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');
+        $comunidad = $comunidadRepository->findOneByCodigo($codigo);
+        
+        $data = array();
+        if($comunidad instanceof Entity\Comunidad){
+            $id_comunidad = $comunidad->getId();
+            $em = $this->getDoctrine()->getEntityManager();
+            $query = $em->createQuery("SELECT h.id, h.nombre FROM CHCGruposBundle:Hermano h where h.comunidad=$id_comunidad ORDER BY h.nombre");
+            $data = $query->getArrayResult();
+        }
+        
+        return  new HttpFoundation\JsonResponse($data);
+ 
+    }
+    
     public function getMatrimoniosAction($codigo)
     {
         $comunidadRepository = $this->getDoctrine()->getRepository('CHCGruposBundle:Comunidad');

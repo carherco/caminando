@@ -1,6 +1,11 @@
 chc_grupos_grupos:
     path:     /comunidad/{codigo}
     defaults: { _controller: CHCGruposBundle:Grupos:index }
+ 
+chc_hermanos_get:
+    path:     /hermanos/{codigo}
+    methods:  [GET]
+    defaults: { _controller: CHCGruposBundle:Grupos:getHermanos }
     
 chc_matrimonios_get:
     path:     /matrimonios/{codigo}
